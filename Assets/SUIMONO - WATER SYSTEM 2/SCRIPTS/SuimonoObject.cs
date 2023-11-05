@@ -23,10 +23,10 @@ namespace Suimono.Core
 		public bool useBeaufortScale = false;
 		public float beaufortScale = 1.0f;
 		public float turbulenceFactor = 1.0f;
-		public float waveScale = 0.5f;
-		public float lgWaveHeight = 0.0f;
-		public float lgWaveScale = 1.0f;
-		public float waveHeight = 1.0f;
+		public float waveScale = 3f;
+		public float lgWaveHeight = 10f;
+		public float lgWaveScale = 3f;
+		public float waveHeight = 1.5f;
 		public float heightProjection = 1.0f;
 		public float useHeightProjection = 1.0f;
 		public float refractStrength = 1.0f;
