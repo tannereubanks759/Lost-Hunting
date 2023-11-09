@@ -52,7 +52,6 @@ public class CharacterControllerScript : MonoBehaviour
     public bool isDead = false;
     public GameObject deathMenu;
 
-    private float attackingNextTIme;
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
