@@ -16,6 +16,8 @@ public class CharacterControllerScript : MonoBehaviour
     public float jumpForce;
     public KeyCode SprintKey;
     float sprintSpeed;
+    public float snowSpeed;
+    public float snowSprintSpeed;
 
     public float sensX;
     public float sensY;
@@ -45,6 +47,7 @@ public class CharacterControllerScript : MonoBehaviour
     public float RateOfFire = 2f;
     public float nextFire;
     public float ShotSoundDistance = 100f;
+    private bool inChamber = true;
 
     public GameObject[] bears;
     public GameObject[] dears;
@@ -52,6 +55,21 @@ public class CharacterControllerScript : MonoBehaviour
     public bool isDead = false;
     public GameObject deathMenu;
 
+
+    public GameObject rainSystem;
+    public GameObject snowSystem;
+
+    public AudioSource GunSource;
+    public AudioClip gunshot;
+    public AudioClip reload;
+
+    public AudioSource BackWalk;
+    public AudioSource BackRun;
+
+    public bool inRain;
+    public bool inSnow;
+
+    public AudioSource stickAudio;
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
@@ -66,27 +84,63 @@ public class CharacterControllerScript : MonoBehaviour
         aimSensY = sensY * .2f;
         nextFire = Time.time;
         bears = GameObject.FindGameObjectsWithTag("Bear");
+
+        snowSpeed = walkSpeed / 2f;
+        snowSprintSpeed = (moveSpeed/2f) * 1.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+
         //movement
         if (isAiming == false && isDead != true)
         {
             //sprinting
             if (Input.GetKey(SprintKey))
             {
+                if (BackRun.isPlaying == false)
+                {
+                    BackRun.Play();
+                }
+                if (inSnow)
+                {
+                    moveSpeed = snowSprintSpeed;
+                }
+                else
+                {
+                    moveSpeed = sprintSpeed;
+                }
                 isSprinting = true;
-                moveSpeed = sprintSpeed;
+                camAnim.SetBool("isRunning", true);
             }
             else
             {
+                BackRun.Stop();
                 isSprinting = false;
-                moveSpeed = walkSpeed;
+                if (inSnow)
+                {
+                    moveSpeed = snowSpeed;
+                }
+                else
+                {
+                    moveSpeed = walkSpeed;
+                }
+                camAnim.SetBool("isRunning", false);
             }
 
+            if((horizontal != 0 || vertical != 0) && isAiming == false)
+            {
+                if (BackWalk.isPlaying == false)
+                {
+                    BackWalk.Play();
+                }
+            }
+            else
+            {
+                BackWalk.Stop();
+            }
 
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
@@ -117,23 +171,34 @@ public class CharacterControllerScript : MonoBehaviour
         }
 
 
+        //reload
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(inChamber == false)
+            {
+                GunSource.PlayOneShot(reload, 1f);
+                nextFire = Time.time + RateOfFire;
+                inChamber = true;
+            }
+        }
 
         //Aiming
         if(!isPaused && !isDead)
         {
             if (Input.GetKey(AimKey) && isSprinting == false)
             {
+                BackWalk.Stop();
                 isAiming = true;
                 camAnim.SetBool("isAiming", true);
                 sensY = aimSensY;
                 sensX = aimSensX;
-                if (Input.GetKeyDown(ShootKey) && Time.time > nextFire)
+                if (Input.GetKeyDown(ShootKey) && inChamber == true && Time.time > nextFire)
                 {
+                    GunSource.PlayOneShot(gunshot, 1f);
                     Shoot();
-                    nextFire = Time.time + RateOfFire;
                 }
             }
-            else if (Input.GetKeyUp(AimKey))
+            else if (Input.GetKeyUp(AimKey) && isAiming == true)
             {
                 isAiming = false;
                 camAnim.SetBool("isAiming", false);
@@ -146,7 +211,7 @@ public class CharacterControllerScript : MonoBehaviour
                 mainCam.fieldOfView = 60;
             }
         }
-
+        
 
         if (isDead)
         {
@@ -176,9 +241,62 @@ public class CharacterControllerScript : MonoBehaviour
                 bears[i].GetComponent<BearAi>().heardNoise();
             }
         }
+
+        inChamber = false;
     }
     public void die()
     {
+        camAnim.SetBool("isDead", true);
         isDead = true;
     }
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Log");
+        if(other.tag == "Terrain" && other.GetComponent<TerrainScript>() != null)
+        {
+            TerrainScript terrain = other.GetComponent<TerrainScript>();
+            if (terrain.isRain == true && rainSystem.activeSelf == false){
+
+                RenderSettings.fogStartDistance = 80f;
+                inRain = true;
+                inSnow = false;
+                rainSystem.SetActive(true);
+                snowSystem.SetActive(false);
+            }
+            else if(terrain.isSnow == true && snowSystem.activeSelf == false)
+            {
+                inSnow = true;
+                inRain = false;
+                RenderSettings.fogStartDistance = 40f;
+                snowSystem.SetActive(true);
+                rainSystem.SetActive(false);
+            }
+            else if(terrain.isRain == false && terrain.isSnow == false)
+            {
+                inRain = false;
+                inSnow = false;
+                RenderSettings.fogStartDistance = 80f;
+                snowSystem.SetActive(false);
+                rainSystem.SetActive(false);
+            }
+        }
+
+
+        //sticks
+        if(other.tag == "stick")
+        {
+            stickAudio.Stop();
+            stickAudio.Play();
+
+            for (int i = 0; i < bears.Length; i++)
+            {
+                if (Vector3.Distance(bears[i].transform.position, this.gameObject.transform.position) < 50 && bears[i].GetComponent<BearAi>().isDead != true)
+                {
+                    bears[i].GetComponent<BearAi>().heardNoise();
+                }
+            }
+        }
+        
+    }
+    
 }

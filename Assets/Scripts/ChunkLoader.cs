@@ -34,7 +34,7 @@ public class ChunkLoader : MonoBehaviour
         playerPos = this.gameObject.transform.position;
         for(int i = 0; i < chunks.Length; i++)
         {
-            if(Vector3.Distance(chunks[i].transform.position, playerPos) > 150)
+            if(Vector3.Distance(chunks[i].transform.position, playerPos) > 200 && chunks[i].GetComponent<TerrainScript>().hasBear == false)
             {
                 chunks[i].enabled = false;
             }

@@ -11,6 +11,7 @@ public class BearAi : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject player;
     public float wanderDistance = 40f;
+    public bool inRange;
 
     public bool hasDirection = false;
 
@@ -22,6 +23,11 @@ public class BearAi : MonoBehaviour
 
     private float attackingNextTIme;
     private bool hasAttackingTime;
+
+    public AudioSource bearSound;
+    public AudioClip AttackClip;
+    public AudioClip DieClip;
+    public AudioClip AggroClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,11 +59,11 @@ public class BearAi : MonoBehaviour
         {
             state = actionState.Die;
         }
-        else if (distanceFromPlayer <= 20f)
+        else if (distanceFromPlayer <= 20f && player.GetComponent<CharacterControllerScript>().isDead == false)
         {
             state = actionState.Attacking;
         }
-        if(player == null)
+        if (player == null || distanceFromPlayer > 180f)
         {
             state = actionState.Idle;
         }
@@ -65,20 +71,28 @@ public class BearAi : MonoBehaviour
     }
     void Attacking()
     {
+        if(inRange ==false)
+        {
+            bearSound.PlayOneShot(AggroClip, 1f);
+        }
+        inRange = true;
         bearAnim.SetBool("isRunning", true);
         agent.SetDestination(player.transform.position);
-        if(distanceFromPlayer < 5)
+        if(distanceFromPlayer < 2.5)
         {
             if (!hasAttackingTime)
             {
                 attackingNextTIme = Time.time + 1.1f;
                 hasAttackingTime = true;
             }
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
             bearAnim.SetBool("isAttacking", true);
             bearAnim.SetBool("isRunning", false);
-            agent.isStopped = true;
+            
             if(Time.time > attackingNextTIme)
             {
+                bearSound.PlayOneShot(AttackClip, 1f);
                 hit();
             }
         }
@@ -94,6 +108,10 @@ public class BearAi : MonoBehaviour
     }
     void Die()
     {
+        if(agent.isStopped == false)
+        {
+            bearSound.PlayOneShot(DieClip, .5f);
+        }
         agent.isStopped = true;
         bearAnim.SetBool("isDead", true);
     }
@@ -123,6 +141,7 @@ public class BearAi : MonoBehaviour
     {
         
         bearAnim.SetBool("isRunning", false);
+        bearAnim.SetBool("isAttacking", false);
         agent.isStopped = true;
     }
     public void heardNoise()
@@ -135,9 +154,30 @@ public class BearAi : MonoBehaviour
     }
     public void hit()
     {
-        if(distanceFromPlayer < 5)
+        if(distanceFromPlayer < 2.5)
         {
             player.GetComponent<CharacterControllerScript>().die();
+            state = actionState.Idle;
+        }
+
+        hasAttackingTime = false;
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Terrain")
+        {
+            other.GetComponent<TerrainScript>().hasBear = true;
+            Debug.Log("HasBear Set True");
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Terrain")
+        {
+            other.GetComponent<TerrainScript>().hasBear = false;
+            Debug.Log("Has Bear Set False");
         }
     }
 }
