@@ -8,7 +8,7 @@ public class BulletScript : MonoBehaviour
     public Rigidbody rb;
 
     Vector3 WindDirection;
-    public float windForce;
+    public static float windForce = 3f;
     // Start is called before the first frame update
     void Start()
     {

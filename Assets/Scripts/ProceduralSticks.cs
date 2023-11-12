@@ -5,21 +5,45 @@ using UnityEngine;
 public class ProceduralSticks : MonoBehaviour
 {
     public GameObject stick;
+    private GameObject[] sticks;
     [Range(0.0f, 1000.0f)] public float spawnPower = 500f;
-    
+
+    public float RenderDistance = 20f;
+
+    private float nextTime = 2f;
+
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         for(int i = 0; i < spawnPower; i++)
         {
             spawn();
         }
+        sticks = GameObject.FindGameObjectsWithTag("stick");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Time.time > nextTime)
+        {
+            float distance; 
+            for(int i = 0; i < sticks.Length; i++)
+            {
+                distance = Vector3.Distance(player.transform.position, sticks[i].transform.position);
+                if(distance > RenderDistance)
+                {
+                    sticks[i].SetActive(false);
+                }
+                else if(sticks[i].activeSelf == false)
+                {
+                    sticks[i].SetActive(true);
+                }
+            }
+            nextTime += 1f;
+        }
     }
 
     void spawn()
@@ -28,7 +52,7 @@ public class ProceduralSticks : MonoBehaviour
 
         float randomYRotation = Random.Range(0f, 360f); // Generate a random angle for rotation around the y-axis
         Quaternion randomRotation = Quaternion.Euler(0, randomYRotation, 0); // Create a rotation using the random angle
-
+        
         Instantiate(stick, RandomPosition, randomRotation);
     }
 }

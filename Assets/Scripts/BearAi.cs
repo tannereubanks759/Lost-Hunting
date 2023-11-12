@@ -28,6 +28,11 @@ public class BearAi : MonoBehaviour
     public AudioClip AttackClip;
     public AudioClip DieClip;
     public AudioClip AggroClip;
+
+    public float SprintingDetectionRange = 50f;
+    public float WalkingDetectionRange = 30f;
+    public float RainSprintDetectionRange = 70f;
+    public float RainWalkingDetectionRange = 50f;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +51,7 @@ public class BearAi : MonoBehaviour
                 Attacking();
                 break;
             case actionState.Idle:
-                Idle();
+                Idle(distanceFromPlayer);
                 break;
             case actionState.Running:
                 Running();
@@ -125,7 +130,7 @@ public class BearAi : MonoBehaviour
             randomPosition = this.transform.position + randomDirection * wanderDistance;
             hasDirection = true;
         }
-        if(agent.transform.position.x != randomPosition.x && agent.transform.position.z != randomPosition.z)
+        if(hasDirection == true && agent.transform.position.x != randomPosition.x && agent.transform.position.z != randomPosition.z)
         {
             bearAnim.SetBool("isRunning", true);
             agent.isStopped = false;
@@ -135,14 +140,37 @@ public class BearAi : MonoBehaviour
         {
             state = actionState.Idle;
         }
-        
+        if(randomPosition.x > 230 || randomPosition.x < -230 || randomPosition.z > 230 || randomPosition.z < -230) 
+        {
+            hasDirection = false;
+        }
     }
-    void Idle()
+    void Idle(float distance)
     {
         
         bearAnim.SetBool("isRunning", false);
         bearAnim.SetBool("isAttacking", false);
         agent.isStopped = true;
+        CharacterControllerScript playerController = player.GetComponent<CharacterControllerScript>();
+        if(distance < 70)
+        {
+            if (distance < RainSprintDetectionRange && playerController.inRain && playerController.isSprinting == true)
+            {
+                heardNoise();
+            }
+            else if (distance < RainWalkingDetectionRange && playerController.inRain && playerController.isSprinting == false)
+            {
+                heardNoise();
+            }
+            else if (distance < SprintingDetectionRange && playerController.isSprinting == true)
+            {
+                heardNoise();
+            }
+            else if (distance < WalkingDetectionRange && playerController.isSprinting == false)
+            {
+                heardNoise();
+            }
+        }
     }
     public void heardNoise()
     {
@@ -163,21 +191,4 @@ public class BearAi : MonoBehaviour
         hasAttackingTime = false;
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Terrain")
-        {
-            other.GetComponent<TerrainScript>().hasBear = true;
-            Debug.Log("HasBear Set True");
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Terrain")
-        {
-            other.GetComponent<TerrainScript>().hasBear = false;
-            Debug.Log("Has Bear Set False");
-        }
-    }
 }

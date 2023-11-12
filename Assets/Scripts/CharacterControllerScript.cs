@@ -54,6 +54,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     public bool isDead = false;
     public GameObject deathMenu;
+    public GameObject pauseMenu;
 
 
     public GameObject rainSystem;
@@ -75,6 +76,9 @@ public class CharacterControllerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pauseMenu.SetActive(false);
+        deathMenu.SetActive(false);
+
         controller = GetComponent<CharacterController>();
         cursorDisable();
         moveSpeed = walkSpeed;
@@ -92,100 +96,87 @@ public class CharacterControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
-        //movement
-        if (isAiming == false && isDead != true)
-        {
-            //sprinting
-            if (Input.GetKey(SprintKey))
-            {
-                if (BackRun.isPlaying == false)
-                {
-                    BackRun.Play();
-                }
-                if (inSnow)
-                {
-                    moveSpeed = snowSprintSpeed;
-                }
-                else
-                {
-                    moveSpeed = sprintSpeed;
-                }
-                isSprinting = true;
-                camAnim.SetBool("isRunning", true);
-            }
-            else
-            {
-                BackRun.Stop();
-                isSprinting = false;
-                if (inSnow)
-                {
-                    moveSpeed = snowSpeed;
-                }
-                else
-                {
-                    moveSpeed = walkSpeed;
-                }
-                camAnim.SetBool("isRunning", false);
-            }
-
-            if((horizontal != 0 || vertical != 0) && isAiming == false)
-            {
-                if (BackWalk.isPlaying == false)
-                {
-                    BackWalk.Play();
-                }
-            }
-            else
-            {
-                BackWalk.Stop();
-            }
-
-            horizontal = Input.GetAxisRaw("Horizontal");
-            vertical = Input.GetAxisRaw("Vertical");
-            moveDirection = transform.forward * vertical + transform.right * horizontal;
-            if (controller.isGrounded && Input.GetKey(KeyCode.Space))
-            {
-                Velocity.y = jumpForce;
-            }
-            else
-            {
-                Velocity.y -= -9.81f * -2f * Time.deltaTime;
-            }
-            controller.SimpleMove((moveDirection).normalized * moveSpeed);
-            controller.Move(Velocity * Time.deltaTime);
-        }
-        
-        //mouse Looking
-        if (isPaused == false && isDead != true)
-        {
-            mouseX = Input.GetAxisRaw("Mouse X");
-            mouseY = Input.GetAxisRaw("Mouse Y");
-            yRotation += mouseX * sensX * multiplier;
-            xRotation -= mouseY * sensY * multiplier;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-            cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
-            transform.rotation = Quaternion.Euler(0, yRotation, 0);
-            cam.transform.position = cameraPos.transform.position;
-        }
-
-
-        //reload
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            if(inChamber == false)
-            {
-                GunSource.PlayOneShot(reload, 1f);
-                nextFire = Time.time + RateOfFire;
-                inChamber = true;
-            }
-        }
-
-        //Aiming
         if(!isPaused && !isDead)
         {
-            if (Input.GetKey(AimKey) && isSprinting == false)
+            //movement
+            if (isAiming == false)
+            {
+                //sprinting
+                if (Input.GetKey(SprintKey) && (horizontal != 0 || vertical != 0))
+                {
+                    if (BackRun.isPlaying == false)
+                    {
+                        BackRun.Play();
+                    }
+                    if (inSnow)
+                    {
+                        moveSpeed = snowSprintSpeed;
+                    }
+                    else
+                    {
+                        moveSpeed = sprintSpeed;
+                    }
+                    isSprinting = true;
+                    camAnim.SetBool("isRunning", true);
+                }
+                else
+                {
+                    BackRun.Stop();
+                    isSprinting = false;
+                    if (inSnow)
+                    {
+                        moveSpeed = snowSpeed;
+                    }
+                    else
+                    {
+                        moveSpeed = walkSpeed;
+                    }
+                    camAnim.SetBool("isRunning", false);
+                }
+
+                if ((horizontal != 0 || vertical != 0) && isAiming == false)
+                {
+                    if (BackWalk.isPlaying == false)
+                    {
+                        BackWalk.Play();
+                    }
+                }
+                else
+                {
+                    BackWalk.Stop();
+                }
+
+                horizontal = Input.GetAxisRaw("Horizontal");
+                vertical = Input.GetAxisRaw("Vertical");
+                moveDirection = transform.forward * vertical + transform.right * horizontal;
+                if (controller.isGrounded && Input.GetKey(KeyCode.Space))
+                {
+                    Velocity.y = jumpForce;
+                }
+                else
+                {
+                    Velocity.y -= -9.81f * -2f * Time.deltaTime;
+                }
+                controller.SimpleMove((moveDirection).normalized * moveSpeed);
+                controller.Move(Velocity * Time.deltaTime);
+            }
+
+
+            //mouse Looking
+            if (isPaused == false && isDead != true)
+            {
+                mouseX = Input.GetAxisRaw("Mouse X");
+                mouseY = Input.GetAxisRaw("Mouse Y");
+                yRotation += mouseX * sensX * multiplier;
+                xRotation -= mouseY * sensY * multiplier;
+                xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+                cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+                transform.rotation = Quaternion.Euler(0, yRotation, 0);
+                cam.transform.position = cameraPos.transform.position;
+            }
+
+            //aiming
+            if (Input.GetKey(AimKey) && isSprinting == false && controller.isGrounded)
             {
                 BackWalk.Stop();
                 isAiming = true;
@@ -210,15 +201,44 @@ public class CharacterControllerScript : MonoBehaviour
             {
                 mainCam.fieldOfView = 60;
             }
+
+            //reload
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                if (inChamber == false)
+                {
+                    GunSource.PlayOneShot(reload, 1f);
+                    nextFire = Time.time + RateOfFire;
+                    inChamber = true;
+                }
+            }
         }
         
-
+        //death check
         if (isDead)
         {
             deathMenu.SetActive(true);
             cursorEnable();
         }
-        
+
+
+        //pause input
+        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false)
+        {
+            isPaused = !isPaused;
+            if(pauseMenu.activeSelf == true)
+            {
+                cursorDisable();
+                Time.timeScale = 1f;
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                cursorEnable();
+                Time.timeScale = 0f;
+                pauseMenu.SetActive(true);
+            }
+        }
     }
 
     public void cursorDisable()
@@ -256,20 +276,20 @@ public class CharacterControllerScript : MonoBehaviour
         {
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.activeSelf == false){
-
                 RenderSettings.fogStartDistance = 80f;
-                inRain = true;
+                RenderSettings.ambientIntensity = .4f;
                 inSnow = false;
-                rainSystem.SetActive(true);
                 snowSystem.SetActive(false);
+                inRain = true;
+                rainSystem.SetActive(true);
             }
             else if(terrain.isSnow == true && snowSystem.activeSelf == false)
             {
-                inSnow = true;
                 inRain = false;
                 RenderSettings.fogStartDistance = 40f;
                 snowSystem.SetActive(true);
                 rainSystem.SetActive(false);
+                inSnow = true;
             }
             else if(terrain.isRain == false && terrain.isSnow == false)
             {

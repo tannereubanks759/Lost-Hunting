@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Bear
   - stick
+  - SnowRing
+  - RainRing
+  - WindRing
   layers:
   - Default
   - TransparentFX

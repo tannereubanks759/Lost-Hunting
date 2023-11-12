@@ -6,7 +6,6 @@ public class TerrainScript : MonoBehaviour
 {
     public bool isSnow;
     public bool isRain;
-    public bool hasBear = false;
     // Start is called before the first frame update
     void Start()
     {
