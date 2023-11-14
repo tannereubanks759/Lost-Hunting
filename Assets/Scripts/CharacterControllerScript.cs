@@ -285,6 +285,7 @@ public class CharacterControllerScript : MonoBehaviour
             }
             else if(terrain.isSnow == true && snowSystem.activeSelf == false)
             {
+                RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 RenderSettings.fogStartDistance = 40f;
                 snowSystem.SetActive(true);
@@ -293,6 +294,7 @@ public class CharacterControllerScript : MonoBehaviour
             }
             else if(terrain.isRain == false && terrain.isSnow == false)
             {
+                RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 inSnow = false;
                 RenderSettings.fogStartDistance = 80f;
