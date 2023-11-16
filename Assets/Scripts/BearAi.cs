@@ -33,6 +33,7 @@ public class BearAi : MonoBehaviour
     public float WalkingDetectionRange = 30f;
     public float RainSprintDetectionRange = 70f;
     public float RainWalkingDetectionRange = 50f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +114,7 @@ public class BearAi : MonoBehaviour
     }
     void Die()
     {
+        
         if(agent.isStopped == false)
         {
             bearSound.PlayOneShot(DieClip, .5f);

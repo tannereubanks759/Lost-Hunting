@@ -13,9 +13,14 @@ public class ProceduralSticks : MonoBehaviour
     private float nextTime = 2f;
 
     private GameObject player;
+
+    private GameObject[] worldObjects;
+    public float worldObjectRender = 120f;
+
     // Start is called before the first frame update
     void Start()
     {
+        worldObjects = GameObject.FindGameObjectsWithTag("WorldObject");
         player = GameObject.FindGameObjectWithTag("Player");
         for(int i = 0; i < spawnPower; i++)
         {
@@ -40,6 +45,18 @@ public class ProceduralSticks : MonoBehaviour
                 else if(sticks[i].activeSelf == false)
                 {
                     sticks[i].SetActive(true);
+                }
+            }
+            for(int i = 0; i < worldObjects.Length; i++)
+            {
+                distance = Vector3.Distance(player.transform.position, worldObjects[i].transform.position);
+                if (distance > worldObjectRender)
+                {
+                    worldObjects[i].SetActive(false);
+                }
+                else if (worldObjects[i].activeSelf == false)
+                {
+                    worldObjects[i].SetActive(true);
                 }
             }
             nextTime += 1f;

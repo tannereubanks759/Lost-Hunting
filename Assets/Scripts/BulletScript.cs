@@ -8,10 +8,13 @@ public class BulletScript : MonoBehaviour
     public Rigidbody rb;
 
     Vector3 WindDirection;
-    public static float windForce = 3f;
+    public static float windForce = 5f;
+
+    private float nextTime = 0f;
     // Start is called before the first frame update
     void Start()
     {
+        nextTime = Time.time + 4f;
         rb = this.GetComponent<Rigidbody>();
     }
 
@@ -20,6 +23,11 @@ public class BulletScript : MonoBehaviour
     {
         rb.velocity = transform.forward * bulletSpeed;
         rb.velocity = (rb.velocity + (new Vector3(1, -.3f, 0) * windForce));
+
+        if(Time.time > nextTime)
+        {
+            Destroy(this.gameObject);
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {

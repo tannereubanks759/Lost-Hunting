@@ -11,6 +11,7 @@ TagManager:
   - SnowRing
   - RainRing
   - WindRing
+  - WorldObject
   layers:
   - Default
   - TransparentFX

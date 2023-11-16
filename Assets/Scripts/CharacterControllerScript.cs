@@ -76,6 +76,8 @@ public class CharacterControllerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isPaused = false;
+        Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         deathMenu.SetActive(false);
 
@@ -277,7 +279,7 @@ public class CharacterControllerScript : MonoBehaviour
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.activeSelf == false){
                 RenderSettings.fogStartDistance = 80f;
-                RenderSettings.ambientIntensity = .4f;
+                RenderSettings.ambientIntensity = .2f;
                 inSnow = false;
                 snowSystem.SetActive(false);
                 inRain = true;
