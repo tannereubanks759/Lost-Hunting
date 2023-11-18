@@ -7,6 +7,9 @@ public class CameraScript : MonoBehaviour
     public Camera cam;
     public GameObject rifle;
     public GameObject image;
+
+    public GameObject boatPrebab;
+    public GameObject boatrot;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,11 @@ public class CameraScript : MonoBehaviour
     {
         cam.fieldOfView = 20;
     }
+    
+    public void UnZoom()
+    {
+        cam.fieldOfView = 60;
+    }
     public void DoneAiming()
     {
         rifle.SetActive(true);
@@ -34,5 +42,16 @@ public class CameraScript : MonoBehaviour
 
         this.GetComponent<Animator>().SetBool("doneAiming", false);
     }
+    public void BoatDone()
+    {
+        this.GetComponent<Animator>().SetBool("BoatDone", true);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<CharacterControllerScript>().isPaused = false;
+        GameObject.Find("Boat_5").SetActive(false);
+        player.GetComponent<CharacterControllerScript>().cursorDisable();
+        player.GetComponent<CharacterControllerScript>().GunSource.PlayOneShot(player.GetComponent<CharacterControllerScript>().reload, 1f);
+        Instantiate(boatPrebab, new Vector3(.006f, -.03999996f, 237.72f), boatrot.transform.rotation);
+    }
+    
 }
 

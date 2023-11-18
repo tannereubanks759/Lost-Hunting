@@ -28,6 +28,7 @@ public class RingManager : MonoBehaviour
     {
         if(other.tag == "RainRing")
         {
+            RenderSettings.ambientIntensity = 1f;
             player.BackWalk.Stop();
             player.BackRun.Stop();
             panelOpen = true;

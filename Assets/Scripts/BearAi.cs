@@ -34,6 +34,7 @@ public class BearAi : MonoBehaviour
     public float RainSprintDetectionRange = 70f;
     public float RainWalkingDetectionRange = 50f;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,11 +85,11 @@ public class BearAi : MonoBehaviour
         inRange = true;
         bearAnim.SetBool("isRunning", true);
         agent.SetDestination(player.transform.position);
-        if(distanceFromPlayer < 2.5)
+        if(distanceFromPlayer < 2.1)
         {
             if (!hasAttackingTime)
             {
-                attackingNextTIme = Time.time + 1.1f;
+                attackingNextTIme = Time.time + .1f;
                 hasAttackingTime = true;
             }
             agent.isStopped = true;
@@ -120,6 +121,7 @@ public class BearAi : MonoBehaviour
             bearSound.PlayOneShot(DieClip, .5f);
         }
         agent.isStopped = true;
+        agent.velocity = Vector3.zero;
         bearAnim.SetBool("isDead", true);
     }
     void Running()
@@ -192,5 +194,7 @@ public class BearAi : MonoBehaviour
 
         hasAttackingTime = false;
     }
+
+    
 
 }

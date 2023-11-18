@@ -71,16 +71,21 @@ public class CharacterControllerScript : MonoBehaviour
     public bool inSnow;
 
     public AudioSource stickAudio;
+    public GameObject[] deers;
+
+    public bool onBoat = true;
+
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
     void Start()
     {
-        isPaused = false;
+        isPaused = true;
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         deathMenu.SetActive(false);
 
+        deers = GameObject.FindGameObjectsWithTag("deer");
         controller = GetComponent<CharacterController>();
         cursorDisable();
         moveSpeed = walkSpeed;
@@ -98,6 +103,12 @@ public class CharacterControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (onBoat)
+        {
+
+        }
+
+
         if(!isPaused && !isDead)
         {
             //movement
@@ -225,7 +236,7 @@ public class CharacterControllerScript : MonoBehaviour
 
 
         //pause input
-        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false)
+        if(Input.GetKeyDown(KeyCode.Escape) && isDead == false && camAnim.GetBool("BoatDone") == true)
         {
             isPaused = !isPaused;
             if(pauseMenu.activeSelf == true)
@@ -263,11 +274,20 @@ public class CharacterControllerScript : MonoBehaviour
                 bears[i].GetComponent<BearAi>().heardNoise();
             }
         }
+        for(int i = 0; i < deers.Length; i++)
+        {
+            if (Vector3.Distance(deers[i].transform.position, this.gameObject.transform.position) < ShotSoundDistance && deers[i].GetComponent<DeerAi>().isDead != true)
+            {
+                deers[i].GetComponent<DeerAi>().heardNoise();
+            }
+        }
 
         inChamber = false;
     }
     public void die()
     {
+        BackRun.Stop();
+        BackWalk.Stop();
         camAnim.SetBool("isDead", true);
         isDead = true;
     }
@@ -314,9 +334,17 @@ public class CharacterControllerScript : MonoBehaviour
 
             for (int i = 0; i < bears.Length; i++)
             {
-                if (Vector3.Distance(bears[i].transform.position, this.gameObject.transform.position) < 50 && bears[i].GetComponent<BearAi>().isDead != true)
+                if (Vector3.Distance(bears[i].transform.position, this.gameObject.transform.position) < 80 && bears[i].GetComponent<BearAi>().isDead != true)
                 {
                     bears[i].GetComponent<BearAi>().heardNoise();
+                }
+
+            }
+            for (int i = 0; i < deers.Length; i++)
+            {
+                if (Vector3.Distance(bears[i].transform.position, this.gameObject.transform.position) < 80 && bears[i].GetComponent<BearAi>().isDead != true)
+                {
+                    deers[i].GetComponent<DeerAi>().heardNoise();
                 }
             }
         }

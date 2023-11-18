@@ -9,10 +9,11 @@ public class ChunkLoader : MonoBehaviour
 
     private float nextFire;
     public GameObject[] bears;
+    public GameObject[] deers;
     // Start is called before the first frame update
     void Start()
     {
-
+        deers = GameObject.FindGameObjectsWithTag("deer");
         bears = GameObject.FindGameObjectsWithTag("Bear");
         chunks = FindObjectsOfType<Terrain>();
         for (int i = 0; i < chunks.Length; i++)
@@ -46,15 +47,26 @@ public class ChunkLoader : MonoBehaviour
                 chunks[i].gameObject.SetActive(true);
             }
         }
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < bears.Length; i++)
         {
-            if (Vector3.Distance(bears[i].transform.position, playerPos) > 100)
+            if (Vector3.Distance(bears[i].transform.position, playerPos) > 130)
             {
                 bears[i].SetActive(false);
             }
             else if(bears[i].GetComponent<BearAi>().isDead != true)
             {
                 bears[i].SetActive(true);
+            }
+        }
+        for(int i = 0; i < deers.Length; i++)
+        {
+            if (Vector3.Distance(deers[i].transform.position, playerPos) > 130)
+            {
+                deers[i].SetActive(false);
+            }
+            else if (deers[i].GetComponent<DeerAi>().isDead != true)
+            {
+                deers[i].SetActive(true);
             }
         }
     }
