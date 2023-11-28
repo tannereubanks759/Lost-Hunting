@@ -75,6 +75,8 @@ public class CharacterControllerScript : MonoBehaviour
 
     public bool onBoat = true;
 
+    public Light light;
+
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
@@ -298,6 +300,7 @@ public class CharacterControllerScript : MonoBehaviour
         {
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.activeSelf == false){
+                light.intensity = 2f;
                 RenderSettings.fogStartDistance = 80f;
                 RenderSettings.ambientIntensity = .2f;
                 inSnow = false;
@@ -307,6 +310,7 @@ public class CharacterControllerScript : MonoBehaviour
             }
             else if(terrain.isSnow == true && snowSystem.activeSelf == false)
             {
+                light.intensity = 3f;
                 RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 RenderSettings.fogStartDistance = 40f;
@@ -316,6 +320,7 @@ public class CharacterControllerScript : MonoBehaviour
             }
             else if(terrain.isRain == false && terrain.isSnow == false)
             {
+                light.intensity = 3f;
                 RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 inSnow = false;

@@ -83,19 +83,19 @@ public class BearAi : MonoBehaviour
             bearSound.PlayOneShot(AggroClip, 1f);
         }
         inRange = true;
-        bearAnim.SetBool("isRunning", true);
         agent.SetDestination(player.transform.position);
         if(distanceFromPlayer < 2.1)
         {
             if (!hasAttackingTime)
             {
-                attackingNextTIme = Time.time + .1f;
+                attackingNextTIme = Time.time + .6f;
                 hasAttackingTime = true;
             }
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
-            bearAnim.SetBool("isAttacking", true);
+
             bearAnim.SetBool("isRunning", false);
+            bearAnim.SetBool("isAttacking", true);
             
             if(Time.time > attackingNextTIme)
             {
