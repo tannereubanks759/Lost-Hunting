@@ -13,7 +13,7 @@ public class CameraScript : MonoBehaviour
 
     public GameManager manager;
 
-    public Animator camAnim;
+    
     // Start is called before the first frame update
     void Start()
     {

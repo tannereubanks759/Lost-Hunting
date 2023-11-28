@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -3954,7 +3954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6175608727821543338, guid: 46ddab750ccb7d442a097295b9edf0dd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -72.69407
+      value: -72.72
       objectReference: {fileID: 0}
     - target: {fileID: 6175608727821543338, guid: 46ddab750ccb7d442a097295b9edf0dd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12063,6 +12063,7 @@ MonoBehaviour:
   stickAudio: {fileID: 1908968538}
   deers: []
   onBoat: 0
+  light: {fileID: 705507994}
 --- !u!114 &562733759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20835,19 +20836,19 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-  m_Intensity: 1.22
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize: 8.03
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.761
     m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NormalBias: 0.97
+    m_NearPlane: 1.05
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -24211,6 +24212,7 @@ MonoBehaviour:
   sound: []
   bears: []
   BearAudioCue: {fileID: 6761439877714606242, guid: c8304af30eb00024184207150c881d4a, type: 3}
+  camAnim: {fileID: 1533422556}
 --- !u!114 &840076257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26058,7 +26060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 333}
+  m_AnchoredPosition: {x: -263, y: 327}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &956258789
@@ -26090,8 +26092,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278232575
+  m_fontColor: {r: 1, g: 0.6452185, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -26108,10 +26110,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 29.85
+  m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -26144,7 +26146,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -18.239616, w: 0}
+  m_margin: {x: 0, y: 0, z: -158.702, w: -18.0302}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -39652,7 +39654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1029983284322497692, guid: 6b98a38e43af45745b07df03a1831c1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -72.26858
+      value: -72.9
       objectReference: {fileID: 0}
     - target: {fileID: 1029983284322497692, guid: 6b98a38e43af45745b07df03a1831c1e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -42425,7 +42427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466588630}
   m_LocalRotation: {x: -0, y: -0, z: 0.4757783, w: 0.87956524}
-  m_LocalPosition: {x: -124.436, y: 0.818, z: -124.362}
+  m_LocalPosition: {x: -124.64, y: 0.51, z: -124.362}
   m_LocalScale: {x: 8.5661, y: 8.5661, z: 8.5661}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44662,6 +44664,7 @@ MonoBehaviour:
   image: {fileID: 772480069}
   boatPrebab: {fileID: 5901124656730284528, guid: 64a959d3292e9854fb49f1e4da9d52b2, type: 3}
   boatrot: {fileID: 614854150}
+  manager: {fileID: 840076256}
 --- !u!1 &1534582922
 GameObject:
   m_ObjectHideFlags: 0
@@ -45947,7 +45950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6764274, g: 1, b: 0.4009434, a: 1}
+  m_Color: {r: 0.6764274, g: 1, b: 0.4009434, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -45979,6 +45982,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3030797160243764749, guid: 4892e8a1659482e4d976d07f8dd25d15, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f87ff47af2846e14683285d636a0d146, type: 2}
     - target: {fileID: 4864487660115578894, guid: 4892e8a1659482e4d976d07f8dd25d15, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 18
@@ -46005,7 +46012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6017942195796585905, guid: 4892e8a1659482e4d976d07f8dd25d15, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 6017942195796585905, guid: 4892e8a1659482e4d976d07f8dd25d15, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46218,7 +46225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4139892709726352626, guid: b3fac0b60cd9dc74aa9b96556594e3ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -72.529396
+      value: -72.76
       objectReference: {fileID: 0}
     - target: {fileID: 4139892709726352626, guid: b3fac0b60cd9dc74aa9b96556594e3ac, type: 3}
       propertyPath: m_LocalPosition.z
@@ -57608,6 +57615,10 @@ PrefabInstance:
     - target: {fileID: 5901124656730284528, guid: 64a959d3292e9854fb49f1e4da9d52b2, type: 3}
       propertyPath: m_Name
       value: Boat_5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901124656730284528, guid: 64a959d3292e9854fb49f1e4da9d52b2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64a959d3292e9854fb49f1e4da9d52b2, type: 3}
