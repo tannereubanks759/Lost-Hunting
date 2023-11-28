@@ -10,6 +10,10 @@ public class CameraScript : MonoBehaviour
 
     public GameObject boatPrebab;
     public GameObject boatrot;
+
+    public GameManager manager;
+
+    public Animator camAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,14 @@ public class CameraScript : MonoBehaviour
         player.GetComponent<CharacterControllerScript>().GunSource.PlayOneShot(player.GetComponent<CharacterControllerScript>().reload, 1f);
         Instantiate(boatPrebab, new Vector3(.006f, -.03999996f, 237.72f), boatrot.transform.rotation);
     }
-    
+
+    public void WinDone()
+    {
+        manager.WinEnd();
+    }
+    public void WinAnimBegin()
+    {
+        manager.WinStart();
+    }
 }
 

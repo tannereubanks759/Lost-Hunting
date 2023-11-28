@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public GameObject BearAudioCue;
 
     int smallestDistanceBear = 0;
+
+    public Animator camAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +93,8 @@ public class GameManager : MonoBehaviour
         animalsLeft -= 1;
         if(animalsLeft <= 0)
         {
+            camAnim.SetBool("win", true);
+            /*
             WinScreen.SetActive(true);
             if (rings.hasRainRing)
             {
@@ -111,6 +115,51 @@ public class GameManager : MonoBehaviour
                 sound[i].Stop();
             }
             Time.timeScale = 0f;
+            */
+
+
+        }
+    }
+    
+    public void WinStart()
+    {
+        /*
+        WinScreen.SetActive(true);
+        if (rings.hasRainRing)
+        {
+            RainEnd.SetActive(true);
+        }
+        if (rings.hasSnowRing)
+        {
+            SnowEnd.SetActive(true);
+        }
+        if (rings.hasWindRing)
+        {
+            WindEnd.SetActive(true);
+        }
+        */
+        player.isPaused = true;
+        player.cursorEnable();
+        for (int i = 0; i < sound.Length; i++)
+        {
+            sound[i].Stop();
+        }
+        //Time.timeScale = 0f;
+    }
+    public void WinEnd()
+    {
+        WinScreen.SetActive(true);
+        if (rings.hasRainRing)
+        {
+            RainEnd.SetActive(true);
+        }
+        if (rings.hasSnowRing)
+        {
+            SnowEnd.SetActive(true);
+        }
+        if (rings.hasWindRing)
+        {
+            WindEnd.SetActive(true);
         }
     }
 }
