@@ -30,6 +30,8 @@ public class DeerAi : MonoBehaviour
     public float RainWalkingDetectionRange = 50f;
 
     private float idleTime = 0;
+
+    private bool playDeathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,12 +39,19 @@ public class DeerAi : MonoBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         state = actionState.Idle;
+        playDeathSound = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         distanceFromPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
+
+        if (isDead == true)
+        {
+            state = actionState.Die;
+        }
+
         switch (state)
         {
             case actionState.Walking:
@@ -58,10 +67,7 @@ public class DeerAi : MonoBehaviour
                 Die();
                 break;
         }
-        if (isDead == true)
-        {
-            state = actionState.Die;
-        }
+        
         if (player == null || distanceFromPlayer > 180f)
         {
             state = actionState.Idle;
@@ -172,9 +178,10 @@ public class DeerAi : MonoBehaviour
     void Die()
     {
 
-        if (agent.isStopped == false)
+        if (playDeathSound == false)
         {
             deerSound.PlayOneShot(DieClip, .5f);
+            playDeathSound = true;
         }
         agent.isStopped = true;
         agent.velocity = Vector3.zero;

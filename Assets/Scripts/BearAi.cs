@@ -34,19 +34,30 @@ public class BearAi : MonoBehaviour
     public float RainSprintDetectionRange = 70f;
     public float RainWalkingDetectionRange = 50f;
 
-
+    private bool playDeathSound;
     // Start is called before the first frame update
     void Start()
     {
         agent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         state = actionState.Idle;
+        playDeathSound = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         distanceFromPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
+
+        if (isDead == true)
+        {
+            state = actionState.Die;
+        }
+        else if (distanceFromPlayer <= 20f && player.GetComponent<CharacterControllerScript>().isDead == false)
+        {
+            state = actionState.Attacking;
+        }
+
         switch (state)
         {
             case actionState.Attacking:
@@ -62,14 +73,7 @@ public class BearAi : MonoBehaviour
                 Die();
                 break;
         }
-        if(isDead == true)
-        {
-            state = actionState.Die;
-        }
-        else if (distanceFromPlayer <= 20f && player.GetComponent<CharacterControllerScript>().isDead == false)
-        {
-            state = actionState.Attacking;
-        }
+        
         if (player == null || distanceFromPlayer > 180f)
         {
             state = actionState.Idle;
@@ -116,9 +120,10 @@ public class BearAi : MonoBehaviour
     void Die()
     {
         
-        if(agent.isStopped == false)
+        if(playDeathSound == false)
         {
             bearSound.PlayOneShot(DieClip, .5f);
+            playDeathSound = true;
         }
         agent.isStopped = true;
         agent.velocity = Vector3.zero;

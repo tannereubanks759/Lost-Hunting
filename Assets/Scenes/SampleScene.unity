@@ -24203,7 +24203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590b9a9ac8c35a4f82f0104e46135c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalsLeft: 1
+  animalsLeft: 5
   player: {fileID: 562733758}
   WindEnd: {fileID: 2074625221}
   SnowEnd: {fileID: 68782251}
