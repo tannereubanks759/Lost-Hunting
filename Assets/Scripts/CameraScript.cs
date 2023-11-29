@@ -13,11 +13,12 @@ public class CameraScript : MonoBehaviour
 
     public GameManager manager;
 
+    public ChunkLoader loader;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        loader.renderDistance = 150f;
     }
 
     // Update is called once per frame
@@ -60,10 +61,13 @@ public class CameraScript : MonoBehaviour
     public void WinDone()
     {
         manager.WinEnd();
+        Time.timeScale = 0f;
     }
     public void WinAnimBegin()
     {
         manager.WinStart();
+        RenderSettings.fog = false;
+        loader.renderDistance = 700f;
     }
 }
 

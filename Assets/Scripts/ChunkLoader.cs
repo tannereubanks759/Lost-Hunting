@@ -10,6 +10,8 @@ public class ChunkLoader : MonoBehaviour
     private float nextFire;
     public GameObject[] bears;
     public GameObject[] deers;
+
+    public float renderDistance = 150f;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,7 @@ public class ChunkLoader : MonoBehaviour
         playerPos = this.gameObject.transform.position;
         for(int i = 0; i < chunks.Length; i++)
         {
-            if(Vector3.Distance(chunks[i].transform.position, playerPos) > 150)
+            if(Vector3.Distance(chunks[i].transform.position, playerPos) > renderDistance)
             {
                 chunks[i].gameObject.SetActive(false);
             }

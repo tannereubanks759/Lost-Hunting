@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 1, g: 1, b: 1, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.01
@@ -12078,6 +12078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bears: []
   deers: []
+  renderDistance: 150
 --- !u!65 &562733760
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24202,7 +24203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e590b9a9ac8c35a4f82f0104e46135c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalsLeft: 5
+  animalsLeft: 1
   player: {fileID: 562733758}
   WindEnd: {fileID: 2074625221}
   SnowEnd: {fileID: 68782251}
@@ -44665,6 +44666,7 @@ MonoBehaviour:
   boatPrebab: {fileID: 5901124656730284528, guid: 64a959d3292e9854fb49f1e4da9d52b2, type: 3}
   boatrot: {fileID: 614854150}
   manager: {fileID: 840076256}
+  loader: {fileID: 562733759}
 --- !u!1 &1534582922
 GameObject:
   m_ObjectHideFlags: 0
