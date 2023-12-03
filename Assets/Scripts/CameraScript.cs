@@ -15,6 +15,7 @@ public class CameraScript : MonoBehaviour
 
     public ChunkLoader loader;
 
+    public AudioSource pencil;
     
     // Start is called before the first frame update
     void Start()
@@ -69,6 +70,10 @@ public class CameraScript : MonoBehaviour
     public void UpdateNotepadFalse()
     {
         this.GetComponent<Animator>().SetBool("UpdateNotepad", false);
+    }
+    public void PlayPencilSound()
+    {
+        pencil.Play();
     }
 }
 

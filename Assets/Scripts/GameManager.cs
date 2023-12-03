@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     int smallestDistanceBear = 0;
 
     public Animator camAnim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
     public void animalDie()
     {
         camAnim.SetBool("UpdateNotepad", true);
+        
         animalsLeft -= 1;
         animalsKilledText.text = "Killed: " + (5 - animalsLeft) + "/5";
         if(animalsLeft <= 0)
