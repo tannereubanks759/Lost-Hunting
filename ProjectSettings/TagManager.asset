@@ -13,11 +13,13 @@ TagManager:
   - WindRing
   - WorldObject
   - deer
+  - Snake
+  - Water
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Effects
   - Water
   - UI
   - bear

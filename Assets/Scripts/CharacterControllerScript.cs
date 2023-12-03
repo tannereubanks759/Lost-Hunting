@@ -58,11 +58,12 @@ public class CharacterControllerScript : MonoBehaviour
 
 
     public ParticleSystem rainSystem;
-    public ParticleSystem snowSystem;
+    public AudioSource SnowSound;
 
     public AudioSource GunSource;
     public AudioClip gunshot;
     public AudioClip reload;
+    public AudioClip gunClick;
 
     public AudioSource BackWalk;
     public AudioSource BackRun;
@@ -75,12 +76,13 @@ public class CharacterControllerScript : MonoBehaviour
 
     public bool onBoat = true;
 
-    public Light light;
+    public Light light1;
 
     public Material DaySkybox;
     public Material NightSkybox;
 
     public GameObject flashlight;
+    public GameObject Dirt;
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
@@ -106,25 +108,24 @@ public class CharacterControllerScript : MonoBehaviour
         snowSprintSpeed = (moveSpeed/2f) * 1.5f;
 
         RenderSettings.fogColor = Color.black;
-        light.intensity = 1f;
+        light1.intensity = 1f;
         RenderSettings.fogStartDistance = 80f;
         RenderSettings.ambientIntensity = .2f;
         inSnow = false;
         inRain = true;
         RenderSettings.skybox = NightSkybox;
         rainSystem.gameObject.SetActive(true);
-        flashlight.SetActive(true);
+        if(flashlight != null)
+        {
+            flashlight.SetActive(true);
+        }
+        Dirt.SetActive(false);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (onBoat)
-        {
-
-        }
-
-
         if(!isPaused && !isDead)
         {
             //movement
@@ -217,6 +218,10 @@ public class CharacterControllerScript : MonoBehaviour
                     GunSource.PlayOneShot(gunshot, 1f);
                     Shoot();
                 }
+                else if(Input.GetKeyDown(ShootKey) && inChamber == false && Time.time > nextFire)
+                {
+                    GunSource.PlayOneShot(gunClick, 1f);
+                }
             }
             else if (Input.GetKeyUp(AimKey) && isAiming == true)
             {
@@ -307,6 +312,13 @@ public class CharacterControllerScript : MonoBehaviour
         camAnim.SetBool("isDead", true);
         isDead = true;
     }
+    public void waterDie()
+    {
+        BackRun.Stop();
+        BackWalk.Stop();
+        camAnim.SetBool("WaterDie", true);
+        isDead = true;
+    }
     public void OnTriggerEnter(Collider other)
     {
         Debug.Log("Log");
@@ -314,48 +326,55 @@ public class CharacterControllerScript : MonoBehaviour
         {
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.isPlaying == false){
-                light.intensity = 1f;
+                light1.intensity = 1f;
                 RenderSettings.fogStartDistance = 80f;
                 RenderSettings.fogColor = Color.black;
                 RenderSettings.ambientIntensity = .2f;
                 inSnow = false;
-                snowSystem.Stop();
                 inRain = true;
                 rainSystem.gameObject.SetActive(true);
                 RenderSettings.skybox = NightSkybox;
                 flashlight.SetActive(true);
+                Dirt.SetActive(false);
+                SnowSound.Stop();
             }
-            else if(terrain.isSnow == true && snowSystem.isPlaying== false)
+            else if(terrain.isSnow == true && SnowSound.isPlaying == false)
             {
+                SnowSound.Play();
                 RenderSettings.fogColor = Color.white;
-                light.intensity = 5f;
+                light1.intensity = 5f;
                 RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 RenderSettings.fogStartDistance = 40f;
-                snowSystem.gameObject.SetActive(true);
                 rainSystem.gameObject.SetActive(false);
                 inSnow = true;
                 RenderSettings.skybox = DaySkybox;
                 flashlight.SetActive(false);
+                Dirt.SetActive(true);
             }
             else if(terrain.isRain == false && terrain.isSnow == false)
             {
+                SnowSound.Stop();
                 RenderSettings.fogColor = Color.white;
-                light.intensity = 5f;
+                light1.intensity = 5f;
                 RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 inSnow = false;
                 RenderSettings.fogStartDistance = 80f;
-                snowSystem.gameObject.SetActive(false);
                 rainSystem.gameObject.SetActive(false);
                 RenderSettings.skybox = DaySkybox;
                 flashlight.SetActive(false);
+                Dirt.SetActive(false);
             }
         }
 
+        if (other.gameObject.tag == "Water")
+        {
+            waterDie();
+        }
 
         //sticks
-        if(other.tag == "stick")
+        if (other.tag == "stick")
         {
             stickAudio.Stop();
             stickAudio.Play();
@@ -378,5 +397,12 @@ public class CharacterControllerScript : MonoBehaviour
         }
         
     }
-    
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Water")
+        {
+            waterDie();
+        }
+    }
+
 }

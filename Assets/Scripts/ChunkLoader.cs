@@ -10,6 +10,7 @@ public class ChunkLoader : MonoBehaviour
     private float nextFire;
     public GameObject[] bears;
     public GameObject[] deers;
+    public GameObject[] snakes;
 
     public float renderDistance = 150f;
     // Start is called before the first frame update
@@ -17,6 +18,7 @@ public class ChunkLoader : MonoBehaviour
     {
         deers = GameObject.FindGameObjectsWithTag("deer");
         bears = GameObject.FindGameObjectsWithTag("Bear");
+        snakes = GameObject.FindGameObjectsWithTag("Snake");
         chunks = FindObjectsOfType<Terrain>();
         for (int i = 0; i < chunks.Length; i++)
         {
@@ -71,6 +73,19 @@ public class ChunkLoader : MonoBehaviour
                 deers[i].SetActive(true);
             }
         }
+        /*
+        for (int i = 0; i < snakes.Length; i++)
+        {
+            if (Vector3.Distance(snakes[i].transform.position, playerPos) > 130)
+            {
+                snakes[i].SetActive(false);
+            }
+            else if (snakes[i].GetComponent<Snake>().state != Snake.actionState.Die)
+            {
+                snakes[i].SetActive(true);
+            }
+        }
+        */
     }
 
     public Terrain[] GetChunks()

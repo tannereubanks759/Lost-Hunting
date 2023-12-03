@@ -18,10 +18,13 @@ public class RingManager : MonoBehaviour
 
     public bool panelOpen = false;
 
+    public GameObject Croc;
+
     // Start is called before the first frame update
     void Start()
     {
         player = this.GetComponent<CharacterControllerScript>();
+        Croc.SetActive(false);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -59,6 +62,7 @@ public class RingManager : MonoBehaviour
     }
     void RainRing()
     {
+        Croc.SetActive(true);
         source.Play();
         player.rainSystem.gameObject.SetActive(false);
         player.inRain = false;
@@ -78,7 +82,7 @@ public class RingManager : MonoBehaviour
     void SnowRing()
     {
         player.inSnow = false;
-        player.snowSystem.gameObject.SetActive(false);
+        player.SnowSound.Stop();
         source.Play();
         hasSnowRing = true;
         ChunkLoader loader = this.GetComponent<ChunkLoader>();

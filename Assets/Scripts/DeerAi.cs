@@ -31,7 +31,6 @@ public class DeerAi : MonoBehaviour
 
     private float idleTime = 0;
 
-    private bool playDeathSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +38,6 @@ public class DeerAi : MonoBehaviour
         agent = this.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         state = actionState.Idle;
-        playDeathSound = false;
     }
 
     // Update is called once per frame
@@ -113,6 +111,7 @@ public class DeerAi : MonoBehaviour
 
     void Walking()
     {
+        float distance = Vector3.Distance(this.transform.position, randomPosition);
         agent.speed = 3;
         deerAnim.SetBool("isRunning", false);
         if (hasDirection == false)
@@ -123,7 +122,7 @@ public class DeerAi : MonoBehaviour
             randomPosition = this.transform.position + randomDirection * Random.Range(10, 20);
             hasDirection = true;
         }
-        if (hasDirection == true && agent.transform.position.x != randomPosition.x && agent.transform.position.z != randomPosition.z)
+        if (hasDirection == true && distance > .5f)
         {
             deerAnim.SetBool("isWalking", true);
             agent.isStopped = false;
@@ -140,6 +139,10 @@ public class DeerAi : MonoBehaviour
     }
     void Running()
     {
+        
+        float distance = Vector3.Distance(this.transform.position, randomPosition);
+        
+        
         agent.speed = 20;
         deerAnim.SetBool("isWalking", false);
         if (hasDirection == false)
@@ -150,7 +153,7 @@ public class DeerAi : MonoBehaviour
             randomPosition = this.transform.position + randomDirection * wanderDistance;
             hasDirection = true;
         }
-        if (hasDirection == true && agent.transform.position.x != randomPosition.x && agent.transform.position.z != randomPosition.z)
+        if (hasDirection == true && distance > .5f)
         {
             deerAnim.SetBool("isRunning", true);
             agent.isStopped = false;
@@ -178,11 +181,6 @@ public class DeerAi : MonoBehaviour
     void Die()
     {
 
-        if (playDeathSound == false)
-        {
-            deerSound.PlayOneShot(DieClip, .5f);
-            playDeathSound = true;
-        }
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
         deerAnim.SetBool("isDead", true);

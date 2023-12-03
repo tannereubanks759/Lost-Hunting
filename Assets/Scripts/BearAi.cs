@@ -147,6 +147,7 @@ public class BearAi : MonoBehaviour
         }
         else
         {
+            hasDirection = false;
             state = actionState.Idle;
         }
         if(randomPosition.x > 230 || randomPosition.x < -230 || randomPosition.z > 230 || randomPosition.z < -230) 
