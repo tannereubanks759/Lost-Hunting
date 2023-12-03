@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4984400568080228124}
   - component: {fileID: 6465044620595269823}
   - component: {fileID: 7265885379623604156}
-  - component: {fileID: 7178082040998146240}
   m_Layer: 0
   m_Name: Broadleaf_Tree 3_Leaves_LOD0
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7178082040998146240
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11195854223090614}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1014903087841782348, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &1761450142604498774
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +191,6 @@ GameObject:
   - component: {fileID: 6041002099052889366}
   - component: {fileID: 2993285547854670984}
   - component: {fileID: 5168139292481045711}
-  - component: {fileID: 4413761103440732021}
   m_Layer: 0
   m_Name: Broadleaf_Tree_3_LOD0
   m_TagString: Untagged
@@ -279,20 +263,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4413761103440732021
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339135454943371154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3596046908476658790, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &3279333762816123833
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +274,6 @@ GameObject:
   - component: {fileID: 8909579793532552647}
   - component: {fileID: 3597395476705982279}
   - component: {fileID: 7787664707637730636}
-  - component: {fileID: 6881279715343935158}
   m_Layer: 0
   m_Name: Broadleaf_Tree_3_LOD4
   m_TagString: Untagged
@@ -377,20 +346,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6881279715343935158
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279333762816123833}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -978883246752475762, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &6179313951188901053
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +357,6 @@ GameObject:
   - component: {fileID: 220228174772621597}
   - component: {fileID: 5227539097621124654}
   - component: {fileID: 3374604460628954570}
-  - component: {fileID: 6288838483299718285}
   m_Layer: 0
   m_Name: Broadleaf_Tree 3_Leaves_LOD3
   m_TagString: Untagged
@@ -475,20 +429,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6288838483299718285
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179313951188901053}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3824147382478606746, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &6382912589270748692
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +440,6 @@ GameObject:
   - component: {fileID: 5571668064391441713}
   - component: {fileID: 6049284280906779153}
   - component: {fileID: 1437534011605085555}
-  - component: {fileID: 5961195990993362439}
   m_Layer: 0
   m_Name: Broadleaf_Tree_3_LOD2
   m_TagString: Untagged
@@ -573,20 +512,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5961195990993362439
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6382912589270748692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3617133704438996787, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &6677513280050457819
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +523,6 @@ GameObject:
   - component: {fileID: 1573941481459448994}
   - component: {fileID: 6036016389031171592}
   - component: {fileID: 4780379224074537044}
-  - component: {fileID: 360486927922147612}
   m_Layer: 0
   m_Name: Broadleaf_Tree_3_LOD3
   m_TagString: Untagged
@@ -671,20 +595,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &360486927922147612
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6677513280050457819}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5699928548903125499, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &7250158219986035041
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,7 +606,6 @@ GameObject:
   - component: {fileID: 7996574186281567814}
   - component: {fileID: 1118173860960308595}
   - component: {fileID: 9026080703112528787}
-  - component: {fileID: 312230007689314050}
   m_Layer: 0
   m_Name: Broadleaf_Tree 3_Leaves_LOD2
   m_TagString: Untagged
@@ -769,20 +678,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &312230007689314050
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7250158219986035041}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2109278582206320598, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &7493336885931489346
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,7 +689,6 @@ GameObject:
   - component: {fileID: 8267572694273679716}
   - component: {fileID: 8436297681820675363}
   - component: {fileID: 206716891237175029}
-  - component: {fileID: 5539774378628233600}
   m_Layer: 0
   m_Name: Broadleaf_Tree 3_Leaves_LOD1
   m_TagString: Untagged
@@ -867,20 +761,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5539774378628233600
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7493336885931489346}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8334111244933889999, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &7686409494105692322
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +772,6 @@ GameObject:
   - component: {fileID: 4717307410270226409}
   - component: {fileID: 2656549495289170257}
   - component: {fileID: 2342187964621931794}
-  - component: {fileID: 141535039108950359}
   m_Layer: 0
   m_Name: Broadleaf_Tree 3_Leaves_LOD4
   m_TagString: Untagged
@@ -965,20 +844,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &141535039108950359
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7686409494105692322}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1244208088772948169, guid: 5beb91b96d900b44b88b348de330953e, type: 3}
 --- !u!1 &7751048635758765176
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,7 +855,6 @@ GameObject:
   - component: {fileID: 7142731532158582498}
   - component: {fileID: 4783653563147534926}
   - component: {fileID: 8843709951734729655}
-  - component: {fileID: 7985437267524831412}
   m_Layer: 0
   m_Name: Broadleaf_Tree_3_LOD1
   m_TagString: Untagged
@@ -1063,17 +927,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7985437267524831412
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7751048635758765176}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3793723180508840590, guid: 5beb91b96d900b44b88b348de330953e, type: 3}

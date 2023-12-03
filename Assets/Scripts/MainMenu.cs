@@ -10,12 +10,15 @@ public class MainMenu : MonoBehaviour
 
     public AudioSource source;
     public AudioClip select;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         Main.SetActive(true);
         Controls.SetActive(false);
         Tutorial.SetActive(false);
+        anim.SetBool("Fade", false);
     }
 
     
@@ -52,5 +55,13 @@ public class MainMenu : MonoBehaviour
     public void Select()
     {
         source.PlayOneShot(select, 1f);
+    }
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void PlayButton()
+    {
+        anim.SetBool("Fade", true);
     }
 }

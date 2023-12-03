@@ -60,7 +60,7 @@ public class RingManager : MonoBehaviour
     void RainRing()
     {
         source.Play();
-        player.rainSystem.SetActive(false);
+        player.rainSystem.gameObject.SetActive(false);
         player.inRain = false;
         hasRainRing = true;
         ChunkLoader loader = this.GetComponent<ChunkLoader>();
@@ -78,7 +78,7 @@ public class RingManager : MonoBehaviour
     void SnowRing()
     {
         player.inSnow = false;
-        player.snowSystem.SetActive(false);
+        player.snowSystem.gameObject.SetActive(false);
         source.Play();
         hasSnowRing = true;
         ChunkLoader loader = this.GetComponent<ChunkLoader>();

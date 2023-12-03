@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 932746338815183466}
   - component: {fileID: 6389645871720318011}
   - component: {fileID: 2817155319892478686}
-  - component: {fileID: 5606585285210269400}
   m_Layer: 0
   m_Name: Fir_Tree_2_LOD3
   m_TagString: Untagged
@@ -172,20 +171,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5606585285210269400
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055196149848671848}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2473142731108340546, guid: 066aeddbdbe9bdb47ab86ff660594513, type: 3}
 --- !u!1 &5323222762255318870
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +182,6 @@ GameObject:
   - component: {fileID: 3173143157223774590}
   - component: {fileID: 788552743938769236}
   - component: {fileID: 4857359137033979322}
-  - component: {fileID: 1901590002166112174}
   m_Layer: 0
   m_Name: Fir_Tree_2_LOD1
   m_TagString: Untagged
@@ -271,20 +255,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1901590002166112174
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5323222762255318870}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4752589385335442499, guid: 066aeddbdbe9bdb47ab86ff660594513, type: 3}
 --- !u!1 &5329047436474695389
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +266,6 @@ GameObject:
   - component: {fileID: 8734595344272547571}
   - component: {fileID: 6928647872905615117}
   - component: {fileID: 6619344304815225855}
-  - component: {fileID: 6016114627862266393}
   m_Layer: 0
   m_Name: Fir_Tree_2_LOD2
   m_TagString: Untagged
@@ -370,20 +339,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6016114627862266393
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5329047436474695389}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3851864694677702868, guid: 066aeddbdbe9bdb47ab86ff660594513, type: 3}
 --- !u!1 &6148641733303149856
 GameObject:
   m_ObjectHideFlags: 0
@@ -395,7 +350,6 @@ GameObject:
   - component: {fileID: 3161561794947917922}
   - component: {fileID: 4061152078322633388}
   - component: {fileID: 1806606599233945455}
-  - component: {fileID: 9122453467840211088}
   m_Layer: 0
   m_Name: Fir_Tree_2_LOD4
   m_TagString: Untagged
@@ -469,20 +423,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9122453467840211088
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6148641733303149856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8911332796518043681, guid: 066aeddbdbe9bdb47ab86ff660594513, type: 3}
 --- !u!1 &7881258816267541286
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +434,6 @@ GameObject:
   - component: {fileID: 7043270658463959134}
   - component: {fileID: 8114370210079904}
   - component: {fileID: 2444830115258590487}
-  - component: {fileID: 123389676431264208}
   m_Layer: 0
   m_Name: Fir_Tree_2_LOD0
   m_TagString: Untagged
@@ -568,17 +507,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &123389676431264208
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7881258816267541286}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8388675958460582279, guid: 066aeddbdbe9bdb47ab86ff660594513, type: 3}
