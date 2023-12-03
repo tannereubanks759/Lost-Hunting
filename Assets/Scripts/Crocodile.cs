@@ -5,13 +5,11 @@ using UnityEngine;
 public class Crocodile : MonoBehaviour
 {
     public GameManager manager;
-    public bool isDead;
     public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-        isDead = false;
 
     }
 
@@ -23,11 +21,11 @@ public class Crocodile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Bullet" && isDead == false)
+        if(collision.gameObject.tag == "Bullet")
         {
-            isDead = true;
-            anim.SetBool("isDead", true);
             manager.animalDie();
+            Destroy(collision.gameObject);
+            Destroy(GameObject.FindGameObjectWithTag("Croc"));
         }
     }
 }

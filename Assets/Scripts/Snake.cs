@@ -65,12 +65,17 @@ public class Snake : MonoBehaviour
         CharacterControllerScript playerController = player.GetComponent<CharacterControllerScript>();
         if (distance < 40)
         {
+            if(this.GetComponent<AudioSource>().isPlaying == false)
+            {
+                this.GetComponent<AudioSource>().Play();
+            }
             state = actionState.Attacking;
         }
     }
 
     void AttackPlayer(float distance)
     {
+
         anim.SetBool("Move", true);
         agent.isStopped = false;
         agent.SetDestination(player.transform.position);

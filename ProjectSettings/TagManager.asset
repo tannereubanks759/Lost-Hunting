@@ -15,6 +15,7 @@ TagManager:
   - deer
   - Snake
   - Water
+  - Croc
   layers:
   - Default
   - TransparentFX
@@ -27,9 +28,9 @@ TagManager:
   - Suimono_Water
   - Suimono_Depth
   - Suimono_Screen
-  - 
-  - 
-  - 
+  - ignoreCol
+  - croc
+  - bullet
   - 
   - 
   - 

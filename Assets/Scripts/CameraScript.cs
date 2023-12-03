@@ -14,16 +14,12 @@ public class CameraScript : MonoBehaviour
     public GameManager manager;
 
     public ChunkLoader loader;
+
     
     // Start is called before the first frame update
     void Start()
     {
         loader.renderDistance = 150f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 
@@ -39,7 +35,7 @@ public class CameraScript : MonoBehaviour
     public void DoneAiming()
     {
         rifle.SetActive(true);
-        image.SetActive(true);
+        image.SetActive(false);
         this.GetComponent<Animator>().SetBool("doneAiming", true);
     }
     public void DoneAimingFalse()
@@ -68,6 +64,11 @@ public class CameraScript : MonoBehaviour
         manager.WinStart();
         RenderSettings.fog = false;
         loader.renderDistance = 700f;
+    }
+
+    public void UpdateNotepadFalse()
+    {
+        this.GetComponent<Animator>().SetBool("UpdateNotepad", false);
     }
 }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4997463485993046936}
   - component: {fileID: 4997463485993046938}
   - component: {fileID: 4997463485993046939}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BulletTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4997463486937111466}
   - component: {fileID: 4997463486937111467}
   - component: {fileID: 4997463486937111464}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -132,7 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 300
   rb: {fileID: 0}
-  windForce: 2
 --- !u!54 &4997463486937111467
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -174,7 +173,7 @@ GameObject:
   - component: {fileID: 4997463487713726793}
   - component: {fileID: 4997463487713726795}
   - component: {fileID: 4997463487713726792}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BulletCasing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

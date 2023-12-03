@@ -83,6 +83,9 @@ public class CharacterControllerScript : MonoBehaviour
 
     public GameObject flashlight;
     public GameObject Dirt;
+
+
+    Color newCol;
     //public GameObject rifle;
     //public GameObject scopeImage;
     // Start is called before the first frame update
@@ -354,8 +357,14 @@ public class CharacterControllerScript : MonoBehaviour
             }
             else if(terrain.isRain == false && terrain.isSnow == false)
             {
+                
+                bool bConverted = ColorUtility.TryParseHtmlString("#9BA6AF", out newCol);
+                //Did it successfully parse the Hex?
+                if (bConverted)
+                {
+                    RenderSettings.fogColor = newCol;
+                }
                 SnowSound.Stop();
-                RenderSettings.fogColor = Color.white;
                 light1.intensity = 5f;
                 RenderSettings.ambientIntensity = 1f;
                 inRain = false;

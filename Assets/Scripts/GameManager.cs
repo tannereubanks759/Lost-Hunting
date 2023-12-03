@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject WinScreen;
 
     public TextMeshProUGUI text;
+    public TextMeshProUGUI animalsKilledText;
 
     private float secondNextTime;
 
@@ -90,61 +91,24 @@ public class GameManager : MonoBehaviour
 
     public void animalDie()
     {
+        camAnim.SetBool("UpdateNotepad", true);
         animalsLeft -= 1;
+        animalsKilledText.text = "Killed: " + (5 - animalsLeft) + "/5";
         if(animalsLeft <= 0)
         {
             camAnim.SetBool("win", true);
-            /*
-            WinScreen.SetActive(true);
-            if (rings.hasRainRing)
-            {
-                RainEnd.SetActive(true);
-            }
-            if (rings.hasSnowRing)
-            {
-                SnowEnd.SetActive(true);
-            }
-            if (rings.hasWindRing)
-            {
-                WindEnd.SetActive(true);
-            }
-            player.isPaused = true;
-            player.cursorEnable();
-            for(int i = 0; i < sound.Length; i++)
-            {
-                sound[i].Stop();
-            }
-            Time.timeScale = 0f;
-            */
-
-
+            
         }
     }
     
     public void WinStart()
     {
-        /*
-        WinScreen.SetActive(true);
-        if (rings.hasRainRing)
-        {
-            RainEnd.SetActive(true);
-        }
-        if (rings.hasSnowRing)
-        {
-            SnowEnd.SetActive(true);
-        }
-        if (rings.hasWindRing)
-        {
-            WindEnd.SetActive(true);
-        }
-        */
         player.isPaused = true;
         player.cursorEnable();
         for (int i = 0; i < sound.Length; i++)
         {
             sound[i].Stop();
         }
-        //Time.timeScale = 0f;
     }
     public void WinEnd()
     {
@@ -162,4 +126,6 @@ public class GameManager : MonoBehaviour
             WindEnd.SetActive(true);
         }
     }
+
+
 }
