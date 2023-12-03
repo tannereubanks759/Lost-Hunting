@@ -131,7 +131,9 @@ public class BearAi : MonoBehaviour
     }
     void Running()
     {
-        if(hasDirection == false)
+        float distance = Vector3.Distance(this.transform.position, randomPosition);
+
+        if (hasDirection == false)
         {
             Vector3 randomDirection = Random.insideUnitSphere; // Random direction vector
             randomDirection.y = 0; // Make it stay in the same plane (2D if you want)
@@ -139,7 +141,7 @@ public class BearAi : MonoBehaviour
             randomPosition = this.transform.position + randomDirection * wanderDistance;
             hasDirection = true;
         }
-        if(hasDirection == true && agent.transform.position.x != randomPosition.x && agent.transform.position.z != randomPosition.z)
+        if(hasDirection == true && distance > 1f)
         {
             bearAnim.SetBool("isRunning", true);
             agent.isStopped = false;
