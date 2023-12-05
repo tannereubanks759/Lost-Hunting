@@ -29355,8 +29355,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 18.76
-  m_Range: 18.52
+  m_Intensity: 51.58
+  m_Range: 31.9
   m_SpotAngle: 133.407
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -62515,6 +62515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752938581322144893}
   - component: {fileID: 808373426225874383}
+  - component: {fileID: 808373426225874384}
   m_Layer: 12
   m_Name: Crocodile
   m_TagString: Croc
@@ -63302,6 +63303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 840076256}
   anim: {fileID: 808373426225874383}
+  die: {fileID: 808373426225874384}
 --- !u!65 &753069628569198361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63387,6 +63389,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &808373426225874384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749725408350806215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fee4fde8ba77d4f9837b565622429e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  nextTime: 0
+  speed: 1
 --- !u!137 &831670084699469561
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
