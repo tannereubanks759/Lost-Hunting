@@ -279,6 +279,30 @@ public class CharacterControllerScript : MonoBehaviour
                 pauseMenu.SetActive(true);
             }
         }
+
+        if (inRain)
+        {
+            if(light1.intensity > 1f)
+            {
+                light1.intensity -= .1f * Time.deltaTime * 3;
+            }
+            if(RenderSettings.ambientIntensity > .2f)
+            {
+                RenderSettings.ambientIntensity -= .1f * Time.deltaTime * 3;
+            }
+
+        }
+        else
+        {
+            if (light1.intensity < 5f)
+            {
+                light1.intensity += .1f * Time.deltaTime * 3;
+            }
+            if (RenderSettings.ambientIntensity < 1f)
+            {
+                RenderSettings.ambientIntensity += .1f * Time.deltaTime * 3;
+            }
+        }
     }
 
     public void cursorDisable()
@@ -332,10 +356,9 @@ public class CharacterControllerScript : MonoBehaviour
         {
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.isPlaying == false){
-                light1.intensity = 1f;
+                
                 RenderSettings.fogStartDistance = 80f;
                 RenderSettings.fogColor = Color.black;
-                RenderSettings.ambientIntensity = .2f;
                 inSnow = false;
                 inRain = true;
                 rainSystem.gameObject.SetActive(true);
@@ -348,8 +371,6 @@ public class CharacterControllerScript : MonoBehaviour
             {
                 SnowSound.Play();
                 RenderSettings.fogColor = Color.white;
-                light1.intensity = 5f;
-                RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 RenderSettings.fogStartDistance = 40f;
                 rainSystem.gameObject.SetActive(false);
@@ -368,8 +389,6 @@ public class CharacterControllerScript : MonoBehaviour
                     RenderSettings.fogColor = newCol;
                 }
                 SnowSound.Stop();
-                light1.intensity = 5f;
-                RenderSettings.ambientIntensity = 1f;
                 inRain = false;
                 inSnow = false;
                 RenderSettings.fogStartDistance = 80f;
