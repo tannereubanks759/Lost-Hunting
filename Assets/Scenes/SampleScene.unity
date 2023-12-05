@@ -14946,6 +14946,7 @@ MonoBehaviour:
   NightSkybox: {fileID: 2100000, guid: 9af23ba5fa5364ff598888460e0e2759, type: 2}
   flashlight: {fileID: 889280565}
   Dirt: {fileID: 633449631}
+  scopeImage: {fileID: 772480069}
 --- !u!114 &562733759
 MonoBehaviour:
   m_ObjectHideFlags: 0

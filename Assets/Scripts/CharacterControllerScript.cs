@@ -87,7 +87,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     Color newCol;
     //public GameObject rifle;
-    //public GameObject scopeImage;
+    public GameObject scopeImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -213,6 +213,7 @@ public class CharacterControllerScript : MonoBehaviour
             {
                 BackWalk.Stop();
                 isAiming = true;
+                
                 camAnim.SetBool("isAiming", true);
                 sensY = aimSensY;
                 sensX = aimSensX;
@@ -229,7 +230,9 @@ public class CharacterControllerScript : MonoBehaviour
             else if (Input.GetKeyUp(AimKey) && isAiming == true)
             {
                 isAiming = false;
+                camAnim.SetBool("doneAiming", false);
                 camAnim.SetBool("isAiming", false);
+                scopeImage.SetActive(false);
                 sensX *= 5;
                 sensY *= 5;
                 mainCam.fieldOfView = 60;

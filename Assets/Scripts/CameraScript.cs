@@ -27,6 +27,7 @@ public class CameraScript : MonoBehaviour
     public void Zoom()
     {
         cam.fieldOfView = 20;
+        image.SetActive(true);
     }
     
     public void UnZoom()
