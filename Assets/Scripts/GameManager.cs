@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < bears.Length; i++)
             {
-                if (Vector3.Distance(bears[i].transform.position, player.transform.position) < Vector3.Distance(bears[smallestDistanceBear].transform.position, player.transform.position))
+                if (bears[i].GetComponent<BearAi>().isDead == false && Vector3.Distance(bears[i].transform.position, player.transform.position) < Vector3.Distance(bears[smallestDistanceBear].transform.position, player.transform.position))
                 {
                     smallestDistanceBear = i;
                 }

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class CharacterControllerScript : MonoBehaviour
 {
     private float horizontal;
@@ -82,15 +82,16 @@ public class CharacterControllerScript : MonoBehaviour
     public Material NightSkybox;
 
     public GameObject flashlight;
-    public GameObject Dirt;
+    public Image Dirt;
 
-
+    
     Color newCol;
     //public GameObject rifle;
     public GameObject scopeImage;
     // Start is called before the first frame update
     void Start()
     {
+        Dirt.gameObject.SetActive(true);
         isPaused = true;
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
@@ -110,10 +111,9 @@ public class CharacterControllerScript : MonoBehaviour
         snowSpeed = walkSpeed / 2f;
         snowSprintSpeed = (moveSpeed/2f) * 1.5f;
 
-        RenderSettings.fogColor = Color.black;
         light1.intensity = 1f;
         RenderSettings.fogStartDistance = 80f;
-        RenderSettings.ambientIntensity = .2f;
+        RenderSettings.ambientIntensity = 1f;
         inSnow = false;
         inRain = true;
         RenderSettings.skybox = NightSkybox;
@@ -122,7 +122,9 @@ public class CharacterControllerScript : MonoBehaviour
         {
             flashlight.SetActive(true);
         }
-        Dirt.SetActive(false);
+        var tempColor = Dirt.color;
+        tempColor.a = 0f;
+        Dirt.color = tempColor;
         
     }
 
@@ -282,25 +284,73 @@ public class CharacterControllerScript : MonoBehaviour
 
         if (inRain)
         {
-            if(light1.intensity > 1f)
+            if(light1.intensity > 2f)
             {
-                light1.intensity -= .1f * Time.deltaTime * 3;
+                light1.intensity -= .1f * Time.deltaTime * 6;
             }
-            if(RenderSettings.ambientIntensity > .2f)
+            if(RenderSettings.ambientIntensity > .3f)
             {
-                RenderSettings.ambientIntensity -= .1f * Time.deltaTime * 3;
+                RenderSettings.ambientIntensity -= .1f * Time.deltaTime * 2;
             }
+            if(RenderSettings.skybox.GetFloat("_Exposure") > 1f)
+            {
+                RenderSettings.skybox.SetFloat("_Exposure", RenderSettings.skybox.GetFloat("_Exposure") - (.1f * Time.deltaTime * 4));
+            }
+            if(Dirt.color.a > 0)
+            {
+                var tempColor = Dirt.color;
+                tempColor.a = tempColor.a - (.1f * Time.deltaTime * 2);
+                Dirt.color = tempColor;
+            }
+            if (RenderSettings.fogStartDistance < 80)
+            {
+                RenderSettings.fogStartDistance += Time.deltaTime * 1f * 20f;
+                RenderSettings.fogEndDistance = RenderSettings.fogStartDistance + 5;
+            }
+
 
         }
         else
         {
             if (light1.intensity < 5f)
             {
-                light1.intensity += .1f * Time.deltaTime * 3;
+                light1.intensity += .1f * Time.deltaTime * 6;
             }
             if (RenderSettings.ambientIntensity < 1f)
             {
-                RenderSettings.ambientIntensity += .1f * Time.deltaTime * 3;
+                RenderSettings.ambientIntensity += .1f * Time.deltaTime * 2;
+            }
+            if (RenderSettings.skybox.GetFloat("_Exposure") < 3f)
+            {
+                RenderSettings.skybox.SetFloat("_Exposure", RenderSettings.skybox.GetFloat("_Exposure") + (.1f * Time.deltaTime * 4));
+            }
+            if (inSnow)
+            {
+                if (Dirt.color.a < 1f)
+                {
+                    var tempColor = Dirt.color;
+                    tempColor.a = tempColor.a + (.1f * Time.deltaTime * 1);
+                    Dirt.color = tempColor;
+                }
+                if(RenderSettings.fogStartDistance > 40)
+                {
+                    RenderSettings.fogStartDistance -= Time.deltaTime * 1f * 20f;
+                    RenderSettings.fogEndDistance = RenderSettings.fogStartDistance + 5;
+                }
+            }
+            else
+            {
+                if (Dirt.color.a > 0)
+                {
+                    var tempColor = Dirt.color;
+                    tempColor.a = tempColor.a - (.1f * Time.deltaTime * 2);
+                    Dirt.color = tempColor;
+                }
+                if (RenderSettings.fogStartDistance < 80)
+                {
+                    RenderSettings.fogStartDistance += Time.deltaTime * 1f * 20f;
+                    RenderSettings.fogEndDistance = RenderSettings.fogStartDistance + 5;
+                }
             }
         }
     }
@@ -357,45 +407,47 @@ public class CharacterControllerScript : MonoBehaviour
             TerrainScript terrain = other.GetComponent<TerrainScript>();
             if (terrain.isRain == true && rainSystem.isPlaying == false){
                 
-                RenderSettings.fogStartDistance = 80f;
-                RenderSettings.fogColor = Color.black;
+                //RenderSettings.fogStartDistance = 80f;
+                //RenderSettings.fogColor = Color.black;
                 inSnow = false;
                 inRain = true;
-                rainSystem.gameObject.SetActive(true);
-                RenderSettings.skybox = NightSkybox;
+                rainSystem.Play();
                 flashlight.SetActive(true);
-                Dirt.SetActive(false);
                 SnowSound.Stop();
             }
             else if(terrain.isSnow == true && SnowSound.isPlaying == false)
             {
                 SnowSound.Play();
-                RenderSettings.fogColor = Color.white;
-                inRain = false;
-                RenderSettings.fogStartDistance = 40f;
-                rainSystem.gameObject.SetActive(false);
-                inSnow = true;
-                RenderSettings.skybox = DaySkybox;
-                flashlight.SetActive(false);
-                Dirt.SetActive(true);
-            }
-            else if(terrain.isRain == false && terrain.isSnow == false)
-            {
-                
+                /*
                 bool bConverted = ColorUtility.TryParseHtmlString("#9BA6AF", out newCol);
                 //Did it successfully parse the Hex?
                 if (bConverted)
                 {
                     RenderSettings.fogColor = newCol;
                 }
+                */
+                inRain = false;
+                //RenderSettings.fogStartDistance = 40f;
+                rainSystem.Stop();
+                inSnow = true;
+                flashlight.SetActive(false);
+            }
+            else if(terrain.isRain == false && terrain.isSnow == false)
+            {
+                /*
+                bool bConverted = ColorUtility.TryParseHtmlString("#9BA6AF", out newCol);
+                //Did it successfully parse the Hex?
+                if (bConverted)
+                {
+                    RenderSettings.fogColor = newCol;
+                }
+                */
                 SnowSound.Stop();
                 inRain = false;
                 inSnow = false;
-                RenderSettings.fogStartDistance = 80f;
-                rainSystem.gameObject.SetActive(false);
-                RenderSettings.skybox = DaySkybox;
+                //RenderSettings.fogStartDistance = 80f;
+                rainSystem.Stop();
                 flashlight.SetActive(false);
-                Dirt.SetActive(false);
             }
         }
 

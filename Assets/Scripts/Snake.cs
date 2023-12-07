@@ -75,11 +75,10 @@ public class Snake : MonoBehaviour
 
     void AttackPlayer(float distance)
     {
-
         anim.SetBool("Move", true);
         agent.isStopped = false;
         agent.SetDestination(player.transform.position);
-        if (distance < 1.5f)
+        if (distance <= 3f)
         {
             player.GetComponent<CharacterControllerScript>().die();
         }

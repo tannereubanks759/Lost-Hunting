@@ -11,8 +11,11 @@ public class ChunkLoader : MonoBehaviour
     public GameObject[] bears;
     public GameObject[] deers;
     public GameObject[] snakes;
+    public GameObject croc;
 
     public float renderDistance = 150f;
+
+    public RingManager rings;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +76,6 @@ public class ChunkLoader : MonoBehaviour
                 deers[i].SetActive(true);
             }
         }
-        /*
         for (int i = 0; i < snakes.Length; i++)
         {
             if (Vector3.Distance(snakes[i].transform.position, playerPos) > 130)
@@ -85,7 +87,18 @@ public class ChunkLoader : MonoBehaviour
                 snakes[i].SetActive(true);
             }
         }
-        */
+        if (rings.hasRainRing)
+        {
+            if (Vector3.Distance(croc.transform.position, playerPos) > 130)
+            {
+                croc.SetActive(false);
+            }
+            else
+            {
+                croc.SetActive(true);
+            }
+        }
+        
     }
 
     public Terrain[] GetChunks()

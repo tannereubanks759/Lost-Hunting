@@ -24,14 +24,12 @@ public class RingManager : MonoBehaviour
     void Start()
     {
         player = this.GetComponent<CharacterControllerScript>();
-        Croc.SetActive(false);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if(other.tag == "RainRing")
         {
-            RenderSettings.ambientIntensity = 1f;
             player.BackWalk.Stop();
             player.BackRun.Stop();
             panelOpen = true;
@@ -48,6 +46,7 @@ public class RingManager : MonoBehaviour
             WindPanel.SetActive(true);
             cursorEnable();
             Destroy(other.gameObject);
+            hasWindRing = true;
             WindRing();
         }
         else if(other.tag == "SnowRing")
@@ -77,6 +76,7 @@ public class RingManager : MonoBehaviour
                 tscript.isRain = false;
             }
         }
+        Croc.GetComponent<CrocodileDieScript>().isSpawned = true;
 
     }
     void SnowRing()

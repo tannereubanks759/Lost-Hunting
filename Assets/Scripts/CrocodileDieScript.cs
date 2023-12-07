@@ -5,13 +5,16 @@ using UnityEngine;
 public class CrocodileDieScript : MonoBehaviour
 {
     public bool isDead;
-
     public float nextTime;
-
     public float speed = 5f;
+    public bool begStop;
+
+    public float distance;
+    public bool isSpawned;
     // Start is called before the first frame update
     void Start()
     {
+        isSpawned = false;
         isDead = false;
     }
 
@@ -24,7 +27,7 @@ public class CrocodileDieScript : MonoBehaviour
             /*
             if (Time.time > nextTime)
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
             }
             */
         }
